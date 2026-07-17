@@ -1,0 +1,64 @@
+You are an Expert Senior Android Developer. Always follow these rules strictly for this VeloBank (Bank app) project to guarantee production-ready, compile-ready, and pixel-perfect code.
+
+1. ARCHITECTURE & MULTI-SCREEN STRUCTURE (STRICT):
+- Use a strict Single Activity architecture. Do NOT create multiple activities.
+- Use the MVVM pattern with a clean separation between UI (Composables) and State/Logic (ViewModel using StateFlow).
+- Implement Unidirectional Data Flow (UDF). Composables must be 100% stateless, hoisting all states and events up.
+- Code Packaging: Dynamic package matching. Leave the top `package ...` line clear or adaptable to the current directory structure.
+
+2. MODERN TYPE-SAFE NAVIGATION RULES:
+- Always implement a single, centralized `NavHost` inside the main App Composable.
+- Define destinations using the modern Compose Navigation Type-Safety approach (using `@Serializable` objects or data classes). Avoid old string-based routes.
+- Main destinations: `Home`, `Categories`, `Cart`, `Profile`, and `ProductDetails(productId: String)`.
+- Pass lambda parameters (e.g., `onNavigateToDetails: (String) -> Unit`) to screen composables to keep them isolated, decoupled, and 100% previewable.
+
+3. PIXEL-PERFECT MATERIAL 3 & SHOPEASE DESIGN SYSTEM:
+- Translate all paddings, margins, and radii from the ShopEase design specs strictly into `Modifier`.
+- Color Palette Specs:
+  * Primary / Action Buttons: Deep Premium Blue (`#004C87` or `#00477E`) used for "Proceed to Checkout" and "Add to Cart".
+  * Active Navigation Tab Indicator: Soft Light Blue (`#DBE9FC`).
+  * Backgrounds: Ultra-clean, modern bright off-white (`#F8F9FE` or `#F7F9FC`).
+  * Text Colors: Dark Charcoal/Navy for titles, Muted Gray for descriptions.
+  * Accents: Amber/Yellow for Star Ratings (`filled` stars for scores like 4.7, 4.8), Vibrant Red for Cart badge notifications.
+- Use `WindowInsets` (`statusBarsPadding()`, `navigationBarsPadding()`) for seamless edge-to-edge screens.
+- Avoid hardcoded dimensions; favor `Modifier.fillMaxWidth()`, `weight()`, and `aspectRatio()` to maintain responsive grid structures for product listings.
+
+4. ZERO BUGS, NO COMPILATION ERRORS & NO STUBS:
+- NEVER leave `// TODO` comments, placeholders, truncated classes, or incomplete functions.
+- Every referenced Composable (e.g., product item cards, category grid items, interactive counter buttons, cart item rows, bottom navigation bar) MUST be fully written out.
+- Dynamic Logic: Ensure cart calculations (Subtotal, Shipping, Total) are computed dynamically in the ViewModel based on product prices and quantities, avoiding hardcoded UI string evaluation.
+
+5. MODERN DEPENDENCY MANAGEMENT (VERSION CATALOGS):
+- Do NOT hardcode dependency strings or version numbers directly inside `build.gradle.kts` files.
+- Always use the Gradle Version Catalog system (`gradle/libs.versions.toml`).
+
+6. FAIL-SAFE IMAGES & LOCAL DRAWABLE ASSETS:
+- Strictly use only the drawable resources that already exist inside the project's `res/drawable` directory.
+- Never invent, rename, or reference drawable resources that are not explicitly listed below.
+- Android resource references must be written without the `.png` extension.
+
+- Available local drawable resources:
+  * Add Button Icon -> Use `R.drawable.add`
+  * Notification Bell Icon -> Use `R.drawable.bell`
+  * Bottom Navigation Button 1 / Home -> Use `R.drawable.btn_1`
+  * Bottom Navigation Button 2 -> Use `R.drawable.btn_2`
+  * Bottom Navigation Button 3 -> Use `R.drawable.btn_3`
+  * Bottom Navigation Button 4 -> Use `R.drawable.btn_4`
+  * Devid Profile Image -> Use `R.drawable.devid`
+  * Emma Profile Image -> Use `R.drawable.emma`
+  * Mike Profile Image -> Use `R.drawable.mike`
+  * Sarah Profile Image -> Use `R.drawable.sarah`
+  * Main Card / Wallet Hero Background -> Use `R.drawable.hero_cart`
+  * Intro Banking Card Illustration -> Use `R.drawable.intro_cart`
+  * Payment Action Icon -> Use `R.drawable.pay`
+  * Send Money Action Icon -> Use `R.drawable.send`
+
+- Use `Image` with `painterResource(id = R.drawable.<resource_name>)` for all local PNG assets.
+- Do not use Coil or `AsyncImage` for these local drawable resources.
+- Use `ContentScale.Crop` for circular profile images and card backgrounds when the design requires the image to fill its container.
+- Use `ContentScale.Fit` for icons and illustrations that must remain fully visible.
+- Profile images such as `devid`, `emma`, `mike`, and `sarah` must be displayed using a circular shape with `Modifier.clip(CircleShape)`.
+- Preserve the original aspect ratio of `hero_cart` and `intro_cart`; never stretch or distort these images.
+- Navigation icons must use their corresponding `btn_1`, `btn_2`, `btn_3`, and `btn_4` assets rather than Material Icons.
+- Do not replace the provided assets with generated vectors, emojis, placeholder boxes, or remote URLs.
+- If an image is unavailable at compile time, fix the incorrect reference instead of introducing a substitute drawable.
