@@ -58,16 +58,7 @@ fun VeloBankNavHost(
             )
         }
 
-        composable<ProductDetails> { backStackEntry ->
-            val details = backStackEntry.toRoute<ProductDetails>()
-            SecondaryTabScreen(
-                title = "Details ${details.productId}",
-                selectedNavIndex = BottomNavDestination.HOME.ordinal,
-                onNavSelected = { index ->
-                    navigateToBottomDestination(navController, index)
-                }
-            )
-        }
+
     }
 }
 

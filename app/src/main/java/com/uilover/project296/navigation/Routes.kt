@@ -17,9 +17,6 @@ object Cards
 @Serializable
 object Settings
 
-@Serializable
-data class ProductDetails(val productId: String)
-
 enum class BottomNavDestination(
     val label: String,
     val route: Any

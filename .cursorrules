@@ -9,11 +9,11 @@ You are an Expert Senior Android Developer. Always follow these rules strictly f
 2. MODERN TYPE-SAFE NAVIGATION RULES:
 - Always implement a single, centralized `NavHost` inside the main App Composable.
 - Define destinations using the modern Compose Navigation Type-Safety approach (using `@Serializable` objects or data classes). Avoid old string-based routes.
-- Main destinations: `Home`, `Categories`, `Cart`, `Profile`, and `ProductDetails(productId: String)`.
+- Main destinations: `Home`, `Categories`, `Cart`, `Profile`.
 - Pass lambda parameters (e.g., `onNavigateToDetails: (String) -> Unit`) to screen composables to keep them isolated, decoupled, and 100% previewable.
 
-3. PIXEL-PERFECT MATERIAL 3 & SHOPEASE DESIGN SYSTEM:
-- Translate all paddings, margins, and radii from the ShopEase design specs strictly into `Modifier`.
+3. PIXEL-PERFECT MATERIAL 3 & velobank DESIGN SYSTEM:
+- Translate all paddings, margins, and radii from the velobank design specs strictly into `Modifier`.
 - Color Palette Specs:
   * Primary / Action Buttons: Deep Premium Blue (`#004C87` or `#00477E`) used for "Proceed to Checkout" and "Add to Cart".
   * Active Navigation Tab Indicator: Soft Light Blue (`#DBE9FC`).
